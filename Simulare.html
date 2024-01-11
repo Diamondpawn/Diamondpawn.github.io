@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Amanet</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            animation: pulsate 3s infinite;
+            background: linear-gradient(to bottom right, #1a1a1a, #333);
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .calculator {
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, #2c2c2c, #333);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 1.2em;
+            border: 2px solid #555;
+            border-radius: 8px;
+            background-color: #444;
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #4caf50;
+        }
+
+        .calculate-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2em;
+            border-radius: 10px;
+        }
+
+        .calculate-btn:hover {
+            background-color: #b9edfa;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.8em;
+            color: #b9edfa;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Calculator Form -->
+    <div class="calculator">
+        <div class="form-group">
+            <label for="valoare" class="form-label">Valoare obiect amanetat:</label>
+            <input type="number" id="valoare" class="form-input" oninput="validateInput('valoare')" required>
+        </div>
+
+        <div class="form-group">
+            <label for="zile" class="form-label">Număr de zile de amanetare:</label>
+            <input type="number" id="zile" class="form-input" oninput="validateInput('zile')" required>
+        </div>
+
+        <button class="calculate-btn" onclick="calculeazaTaxa()">Calculează Taxa</button>
+        <button class="calculate-btn" onclick="window.location.href = 'Home.html'">Inapoi</button>
+        <div class="result" id="rezultat"></div>
+    </div>
+
+    <script>
+        function validateInput(inputId) {
+            var inputValue = parseFloat(document.getElementById(inputId).value);
+
+            if (isNaN(inputValue) || inputValue < 0) {
+                document.getElementById(inputId).value = 0;
+            }
+        }
+
+        function calculeazaTaxa() {
+            var valoare = parseFloat(document.getElementById('valoare').value);
+            var zile = parseInt(document.getElementById('zile').value);
+
+            var TB = 0.027; // Tarif de bază
+            var TS = 0.009; // Procent suplimentar pe zi
+
+            var taxa = TB + (TS * valoare * zile);
+
+            document.getElementById('rezultat').innerHTML = "Taxa de amanet este: " + taxa.toFixed(0) + " RON";
+        }
+    </script>
+
+</body>
+
+</html>

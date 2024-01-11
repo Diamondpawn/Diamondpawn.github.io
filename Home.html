@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawn Shop Showcase</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            /* Dark background color */
+            color: white;
+            transition: background 1s ease-in-out;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Set z-index to -1 to place it behind other elements */
+        }
+
+        .animated-welcome {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            /* Set z-index to 1 to place it above the particles */
+            animation: fadeIn 2s ease-in-out;
+            /* Smooth fade-in effect for the welcome content */
+        }
+
+        .welcome-text {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #b9edfa;
+        }
+
+        .explore-btn {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease-out;
+            /* Added animation for button */
+            transition: background-color 0.3s, color 0.3s;
+            /* Added smooth transition for hover effect */
+            z-index: 1;
+            /* Set z-index to 1 to place it above the particles */
+        }
+
+        .explore-btn:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Style for the modal */
+        .modal-content {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .modal-header,
+        .modal-footer {
+            border: none;
+        }
+
+        .modal-header button {
+            color: white;
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        .calculator {
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, #2c2c2c, #333);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 1.2em;
+            border: 2px solid #555;
+            border-radius: 8px;
+            background-color: #444;
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #4caf50;
+        }
+
+        .calculate-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2em;
+            border-radius: 10px;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.8em;
+            color: #4caf50;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Particle Animation -->
+    <div id="particles-js"></div>
+
+    <!-- Animated Welcome Page -->
+    <div class="animated-welcome animate__animated animate__fadeIn">
+        <div class="welcome-text">
+            Welcome to Diamond Pawn Shop!
+        </div>
+        <img src="diamond.png" alt="Explore Image" class="explore-img" style="width: 150px; height: auto;"
+            onclick="openNavigationModal()">
+    </div>
+
+
+    <!-- Modal for Navigation -->
+    <div class="modal" id="navigationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                </div>
+                <div class="modal-body">
+                    <p><a href="Jewlery.html" onclick="navigateFromModal('Jewlery.html')"
+                            class="btn btn-outline-light explore-btn">Bijuterii</a></p>
+                    <p><a href="Cars.html" onclick="navigateFromModal('Cars.html')"
+                            class="btn btn-outline-light explore-btn">Mașini</a></p>
+                    <p><a href="Simulare.html" onclick="navigateFromModal('Simulare.html')"
+                            class="btn btn-outline-light explore-btn">Simulare contract</a></p>
+                    <p><a href="#" onclick="closeNavigationModal()"
+                            class="btn btn-outline-light explore-btn">Închide</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Particle.js Configuration -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    },
+                    image: {
+                        src: 'img/github.svg',
+                        width: 100,
+                        height: 100
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Particle background color transition
+        function toggleBackgroundColor() {
+            var body = document.body;
+            body.style.background = body.style.background === 'black' ? 'gray' : 'black';
+            setTimeout(toggleBackgroundColor, 5000); // Toggle every 5 seconds
+        }
+
+        toggleBackgroundColor();
+    </script>
+
+    <script>
+        function openNavigationModal() {
+            $('#navigationModal').modal('show');
+        }
+
+        function closeNavigationModal() {
+            $('#navigationModal').modal('hide');
+        }
+
+        function navigateFromModal(category) {
+            closeNavigationModal();
+            window.location.href = category;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Showcase</title>
+  <!-- Add Animate.css and Bootstrap CSS link here -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Add custom styles here if needed */
+    body {
+      background: linear-gradient(to bottom right, black, grey);
+      color: white;
+      /* Set default text color to white */
+      overflow-x: hidden;
+      /* Hide horizontal scrollbar */
+    }
+
+    .fixed-size-card {
+      width: 400px;
+      height: 400px;
+      color: black;
+      /* Set text color within cards */
+      perspective: 1000px;
+      /* Set the perspective for the 3D effect */
+    }
+
+    .fixed-size-card .card {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      /* Preserve 3D transformations */
+      transition: transform 0.5s;
+      /* Add smooth transition on transform */
+    }
+
+    .fixed-size-card:hover .card {
+      transform: rotateY(180deg);
+      /* Flip the card on hover */
+    }
+
+    .fixed-size-card .card .card-front,
+    .fixed-size-card .card .card-back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      /* Hide the back face of the card */
+    }
+
+    .fixed-size-card .card .card-front {
+      transform: rotateY(0deg);
+      /* Initial state for front face */
+    }
+
+    .fixed-size-card .card .card-back {
+      transform: rotateY(180deg);
+      /* Initial state for back face */
+      background: linear-gradient(to bottom, #ddd, #999);
+      /* Background color for the back of the card */
+      padding: 20px;
+      display: none;
+      /* Initially hide the back of the card */
+    }
+
+    .fixed-size-card:hover .card .card-front {
+      display: none;
+      /* Hide front when hovered */
+    }
+
+    .fixed-size-card:hover .card .card-back {
+      display: block;
+      /* Show back when hovered */
+    }
+
+    .fixed-size-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Ensure images maintain their aspect ratio */
+    }
+
+    .credits {
+      padding: 20px;
+      background-color: #333;
+      text-align: center;
+    }
+
+    .intro-section {
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .intro-text {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      /* Ensure overflow is hidden to hide shine overflow */
+    }
+
+    .intro-text::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -200%;
+      /* Initially position outside the container */
+      width: 150%;
+      /* Smaller width for the shine */
+      height: 100%;
+      background: linear-gradient(to right, transparent 0%, white 15%, transparent 100%);
+      animation: shineAnimation 4s linear infinite;
+      /* Slower animation */
+    }
+
+    @keyframes shineAnimation {
+
+      0%,
+      100% {
+        left: -200%;
+        /* Move shine to the left edge */
+      }
+
+      50% {
+        left: 100%;
+        /* Move shine to the right edge */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="Logo.png" width="35" height="35" class="d-inline-block align-top" alt="Pawn Shop">
+      Pawn Shop FPLAYT
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#companyInfoModal">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Introductory Section -->
+  <div class="intro-section">
+    <div class="animate__animated animate__fadeIn">
+      <div class="intro-text">
+        Descoperiți eleganța inconfundabilă în bijuteriile noastre de lux și ceasurile de top pentru bărbați și femei.
+        Fiecare piesă, o poveste de rafinament și stil.
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Content -->
+  <div class="container mt-5">
+    <div class="row" id="showcase">
+      <!-- Showcase items will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- Company Info Modal -->
+  <div class="modal fade" id="companyInfoModal" tabindex="-1" role="dialog" aria-labelledby="companyInfoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="companyInfoModalLabel" style="color: black;">Despre noi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="color: black;"> <!-- Set text color to black -->
+          <!-- Add your company information here -->
+          <p>Noi ne ocupam cu, cumpararea obiectelor de valoare. Atat masini cat si bijuterii.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credits Section -->
+  <div class="credits">
+    <p>Credits and Additional Information</p>
+    <p>Any additional information or credits can be placed here.</p>
+  </div>
+
+  <!-- Add Bootstrap JS and Popper.js scripts here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Add Animate.css script here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.js"></script>
+
+  <script>
+    var items = [
+      { src: 'Images/image.png', alt: '...', title: 'Audemars Piguet', description: 'Full Platina pentru barbati, o bijuterie masculină ce emană lux și distincție.' },
+      { src: 'Images/image2.png', alt: '...', title: 'Audemars Piguet', description: 'Full Platina & Gold pentru barbati, eleganță incontestabilă într-o combinație de platină și aur.' },
+      { src: 'Images/image3.png', alt: '...', title: 'Apple Watch', description: 'Orice varianta pentru dame & barbati, tehnologie și stil redefinește ce înseamnă să fii la modă.' },
+      { src: 'Images/image4.png', alt: '...', title: 'Lant Double Cuban', description: 'Gold pentru barbati, strălucirea aurului într-un design masculin și modern.' },
+      { src: 'Images/image5.png', alt: '...', title: 'Lant LS Snake', description: 'Gold pentru barbati, eșarfele de aur într-un design serpentin distinct.' },
+      { src: 'Images/image6.png', alt: '...', title: 'Lant AK', description: 'Gold pentru barbati, inspirat de forță și stil, un statement de masculinitate.' },
+      { src: 'Images/image7.png', alt: '...', title: 'Lant VIP 24K Cross', description: 'Gold pentru barbati, un simbol de lux, eleganță și spiritualitate.' },
+      { src: 'Images/image8.png', alt: '...', title: 'Lant Double Cross', description: 'Gold pentru barbati, o combinație impresionantă de design și simbolism.' },
+      { src: 'Images/image9.png', alt: '...', title: 'Lant Tennis', description: 'Gold pentru barbati, strălucirea discretă a unui lanț perfect pentru orice ocazie.' },
+      { src: 'Images/image10.png', alt: '...', title: 'Lant Among Us', description: 'Orice varianta disponibila pentru barbati, o declarație de individualitate și stil în lumea modernă.' },
+      { src: 'Images/image11.png', alt: '...', title: 'Audemars Piguet', description: 'Full Platina & Gold pentru dame, eleganța rafinată creată pentru femeia sofisticată.' },
+      { src: 'Images/image12.png', alt: '...', title: 'Audemars Piguet', description: 'Full Platina pentru dame, un ceas feminin, plin de farmec și eleganță.' },
+      { src: 'Images/image13.png', alt: '...', title: 'Lant Among Us', description: 'Orice varianta disponibila pentru dame, o expresie a individualității și feminității.' },
+      { src: 'Images/image14.png', alt: '...', title: 'Lant Cuban', description: 'Full platina pentru dame, un manifest de stil și strălucire dedicat femeilor pretențioase.' },
+      // Add more items as needed
+    ];
+
+    // Function to generate showcase items with fadeIn animation
+    function generateShowcase() {
+      const showcase = document.getElementById('showcase');
+      showcase.innerHTML = '';
+
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('col-md-4', 'mb-4', 'animate__animated', 'animate__fadeIn', 'delay-' + (index + 1), 'fixed-size-card');
+        card.innerHTML = `
+      <div class="card">
+        <div class="card-front">
+          <img src="${item.src}" class="card-img-top fixed-size-image" alt="${item.alt}">
+          <div class="card-body">
+            <!-- Title and description on the front of the card -->
+          </div>
+        </div>
+        <div class="card-back">
+          <h5 class="card-title">${item.title}</h5>
+          <p class="card-text">${item.description}</p>
+          <!-- Add a button to send a form for each card -->
+          <button type="button" class="btn btn-primary" onclick="sendForm('${item.title}')">Solicita contractul</button>
+        </div>
+      </div>
+    `;
+        showcase.appendChild(card);
+      });
+    }
+
+    function sendForm(title) {
+      window.location.href = "Contract.html";
+    }
+    // Call the function to generate the showcase
+    generateShowcase();
+  </script>
+
+</body>
+
+</html>

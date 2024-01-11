@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Form</title>
+  <!-- Add Bootstrap CSS link here if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, black, grey);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .loan-form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      font-weight: bold;
+      font-size: 1.2em;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    .calculate-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1em;
+      border-radius: 5px;
+    }
+
+    .calculate-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #4caf50;
+    }
+
+    /* Toast Styles */
+    .toast {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .verification-success {
+      display: inline-block;
+      margin-right: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Loan Form -->
+  <div class="container mt-5 loan-form">
+    <form id="loanForm">
+      <div class="form-group">
+        <label for="nume" class="form-label">Nume:</label>
+        <input type="text" id="nume" name="nume" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="prenume" class="form-label">Prenume:</label>
+        <input type="text" id="prenume" name="prenume" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Mail (discord):</label>
+        <input type="email" id="email" name="email" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="obiecte" class="form-label">Obiect/Obiecte date spre amanetare:</label>
+        <textarea id="obiecte" name="obiecte" class="form-input" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="perioada" class="form-label">Perioada de amanetare:</label>
+        <input type="text" id="perioada" name="perioada" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="data" class="form-label">Data:</label>
+        <input type="date" id="data" name="data" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="semnatura" class="form-label">Semnatura:</label>
+        <input type="text" id="semnatura" name="semnatura" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <button type="button" class="calculate-btn" onclick="submitForm()">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Toast for success message -->
+  <div class="toast" id="successToast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"
+    style="color: black;">
+    <div class="toast-body">
+      <div class="verification-success">
+        <!-- Animated checkmark SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" width="30px" height="30px">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+        </svg>
+      </div>
+      <strong>Success:</strong> Contractul a fost trimis cu succes!
+    </div>
+  </div>
+
+  <!-- Add Bootstrap JS and Popper.js scripts here if needed -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function submitForm() {
+      // Collect form data
+      var formData = {
+        nume: document.getElementById('nume').value,
+        prenume: document.getElementById('prenume').value,
+        email: document.getElementById('email').value,
+        obiecte: document.getElementById('obiecte').value,
+        perioada: document.getElementById('perioada').value,
+        data: document.getElementById('data').value,
+        semnatura: document.getElementById('semnatura').value
+      };
+
+      // Show success toast
+      $('#successToast').toast('show');
+
+      // Construct Discord webhook payload
+      var discordPayload = {
+        content: 'Contract nou!',
+        embeds: [{
+          title: 'Detaliile contractului',
+          color: 3066993, // Discord color (blue)
+          fields: [
+            { name: 'Nume', value: formData.nume, inline: true },
+            { name: 'Prenume', value: formData.prenume, inline: true },
+            { name: 'Email', value: formData.email, inline: true },
+            { name: 'Obiecte', value: formData.obiecte, inline: false },
+            { name: 'Perioada', value: formData.perioada, inline: true },
+            { name: 'Data', value: formData.data, inline: true },
+            { name: 'Semnatura', value: formData.semnatura, inline: true }
+          ]
+        }]
+      };
+
+      // Send payload to Discord webhook
+      fetch('https://discord.com/api/webhooks/1195072327071826021/2CuatFcfPI8oEtYQSw0Q8puul-RhCgR67dX0OBWNCyPRJpluKp8Df2vvAxtrYydB2s8Q', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(discordPayload)
+      })
+        .then(response => {
+          // Handle server response (optional)
+          console.log(response);
+        })
+        .catch(error => {
+          // Handle error (optional)
+          console.error('Error:', error);
+        });
+
+      // Redirect to the home page after a delay (adjust the delay as needed)
+      setTimeout(function () {
+        window.location.href = 'Home.html';
+      }, 3000); // 3000 milliseconds (3 seconds) delay
+    }
+  </script>
+
+</body>
+
+</html>

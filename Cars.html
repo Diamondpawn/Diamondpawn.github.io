@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Showcase</title>
+    <!-- Add Animate.css and Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add custom styles here if needed */
+        body {
+            background: linear-gradient(to bottom right, black, grey);
+            color: white;
+            /* Set default text color to white */
+            overflow-x: hidden;
+            /* Hide horizontal scrollbar */
+        }
+
+        .fixed-size-card {
+            width: 400px;
+            height: 400px;
+            color: black;
+            /* Set text color within cards */
+            perspective: 1000px;
+            /* Set the perspective for the 3D effect */
+        }
+
+        .fixed-size-card .card {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            /* Preserve 3D transformations */
+            transition: transform 0.5s;
+            /* Add smooth transition on transform */
+        }
+
+        .fixed-size-card:hover .card {
+            transform: rotateY(180deg);
+            /* Flip the card on hover */
+        }
+
+        .fixed-size-card .card .card-front,
+        .fixed-size-card .card .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            /* Hide the back face of the card */
+        }
+
+        .fixed-size-card .card .card-front {
+            transform: rotateY(0deg);
+            /* Initial state for front face */
+        }
+
+        .fixed-size-card .card .card-back {
+            transform: rotateY(180deg);
+            /* Initial state for back face */
+            background: linear-gradient(to bottom, #ddd, #999);
+            /* Background color for the back of the card */
+            padding: 20px;
+            display: none;
+            /* Initially hide the back of the card */
+        }
+
+        .fixed-size-card:hover .card .card-front {
+            display: none;
+            /* Hide front when hovered */
+        }
+
+        .fixed-size-card:hover .card .card-back {
+            display: block;
+            /* Show back when hovered */
+        }
+
+        .fixed-size-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensure images maintain their aspect ratio */
+        }
+
+        .credits {
+            padding: 20px;
+            background-color: #333;
+            text-align: center;
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .intro-text {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            /* Ensure overflow is hidden to hide shine overflow */
+        }
+
+        .intro-text::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -200%;
+            /* Initially position outside the container */
+            width: 150%;
+            /* Smaller width for the shine */
+            height: 100%;
+            background: linear-gradient(to right, transparent 0%, white 15%, transparent 100%);
+            animation: shineAnimation 4s linear infinite;
+            /* Slower animation */
+        }
+
+        @keyframes shineAnimation {
+
+            0%,
+            100% {
+                left: -200%;
+                /* Move shine to the left edge */
+            }
+
+            50% {
+                left: 100%;
+                /* Move shine to the right edge */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="Logo.png" width="35" height="35" class="d-inline-block align-top" alt="Pawn Shop">
+            Pawn Shop FPLAYT
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#companyInfoModal">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Introductory Section -->
+    <div class="intro-section">
+        <div class="animate__animated animate__fadeIn">
+            <div class="intro-text">
+                Descoperiți eleganța inconfundabilă în colecția noastră de mașini de lux.
+                Fiecare vehicul, o poveste de performanță și stil rafinat.
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+        <div class="row" id="showcase">
+            <!-- Showcase items will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Company Info Modal -->
+    <div class="modal fade" id="companyInfoModal" tabindex="-1" role="dialog" aria-labelledby="companyInfoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="companyInfoModalLabel" style="color: black;">Despre noi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color: black;"> <!-- Set text color to black -->
+                    <!-- Add your company information here -->
+                    <p>Noi ne ocupam cu, cumpararea obiectelor de valoare. Atat masini cat si bijuterii.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credits Section -->
+    <div class="credits">
+        <p>Credits and Additional Information</p>
+        <p>Any additional information or credits can be placed here.</p>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Add Animate.css script here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.js"></script>
+
+    <script>
+        var items = [
+            { src: 'Masini/BugattiDivo.png', alt: '...', title: 'Bugatti Divo', description: 'O capodoperă a ingineriei și designului, Bugatti Divo îmbină viteză uluitoare cu o eleganță de neegalat.' },
+            { src: 'Masini/BugattiSuperSport.png', alt: '...', title: 'Bugatti Super Sport', description: 'Bugatti Super Sport, simbol al puterii brute și al priceperii aerodinamice, redefinește limitele automobilelor de performanță înalte.' },
+            { src: 'Masini/BugattiVeyron.png', alt: '...', title: 'Bugatti Veyron', description: 'Bugatti Veyron, o supermașină iconică, stă mărturie pentru tehnologia de vârf și excelența în industria auto.' },
+            { src: 'Masini/FerrariGTCLusso.png', alt: '...', title: 'Ferrari GTC Lusso', description: 'Ferrari GTCLusso, o combinație de lux și performanță, surprinde esența meșteșugului italian și a vitezei.' },
+            { src: 'Masini/FordGT.png', alt: '...', title: 'Ford GT', description: 'Ford GT, un clasic modern, evidențiază inovația americană și o căutare nemiloasă a vitezei și stilului.' },
+            { src: 'Masini/KoeniseggAgeraRS.png', alt: '...', title: 'Koenisegg Agera RS', description: 'Koenigsegg Agera RS, o minune de hypercar, reprezintă inovația suedeză la superlativ, depășind limitele cu fiecare curbă.' },
+            { src: 'Masini/KoeniseggGemera.png', alt: '...', title: 'Koenisegg Gemera', description: 'Koenigsegg Gemera, un hibrid revoluționar, combină sustenabilitatea cu performanța ridicată, redefinind peisajul supercar-urilor.' },
+            { src: 'Masini/KoeniseggJesko.png', alt: '...', title: 'Koenisegg Jesko', description: 'Koenigsegg Jesko, o simfonie a puterii și preciziei, incarnează căutarea neobosită a perfecțiunii auto.' },
+            { src: 'Masini/LamborghiniAventador.png', alt: '...', title: 'Lamborghini Aventador', description: 'Lamborghini Aventador, un simbol al extravaganței italiene, captivează cu designul său agresiv și performanța sa furtunoasă.' },
+            { src: 'Masini/LamborghiniGallardo.png', alt: '...', title: 'Lamborghini Gallardo', description: 'Lamborghini Gallardo, un clasic modern, exemplifică echilibrul perfect între stil și viteză.' },
+            { src: 'Masini/LamborghiniSian.png', alt: '...', title: 'Lamborghini Sian', description: 'Lamborghini Sian, o capodoperă a designului auto, îmbină perfecțiunea estetică cu performanța uluitoare.' },
+            { src: 'Masini/LykanHyperSport.png', alt: '...', title: 'Lykan Hyper Sport', description: 'Lykan Hyper Sport, o bijuterie rară în lumea supercar-urilor, emană lux și exclusivitate.' },
+            { src: 'Masini/MCLarenSpeedtail.png', alt: '...', title: 'MC Laren Speedtail', description: 'MC Laren Speedtail, un exponat de inovație tehnică, redefinește standardele pentru viteza maximă.' },
+            { src: 'Masini/MitsubishiLancerEVO9.png', alt: '...', title: 'Mitsubishi Lancer EVO9', description: 'Mitsubishi Lancer EVO9, o legendă a motorsportului, continuă să impresioneze cu designul său iconic și performanța agresivă.' },
+            { src: 'Masini/PaganiHuayraRoadSter.png', alt: '...', title: 'Pagani Huayra RoadSter', description: 'Pagani Huayra RoadSter, o creație artistică pe patru roți, simbolizează perfecțiunea și individualitatea.' },
+            { src: 'Masini/RollsRoyceDownOnyx.png', alt: '...', title: 'Rolls Royce Down Onyx', description: 'Rolls Royce Down Onyx, o expresie a luxului britanic, oferă o experiență de conducere fără egal.' },
+            { src: 'Masini/RollsRoycePhantom.png', alt: '...', title: 'Rolls Royce Phantom', description: 'Rolls Royce Phantom, epitomul eleganței și rafinamentului, reprezintă apogeul luxului auto.' },
+            { src: 'Masini/DodgeCharger69.png', alt: '...', title: 'Dodge Charger 69', description: 'Dodge Charger 69, un clasic american, emană putere și stil retro în fiecare detaliu.' },
+            { src: 'Masini/LanciaDelta.png', alt: '...', title: 'Lancia Delta', description: 'Lancia Delta, o icoană a motorsportului, îmbină performanța sportivă cu designul italian distinctiv.' },
+            { src: 'Masini/ST2000.png', alt: '...', title: 'Honda ST2000', description: 'Honda ST2000, un roadster japonez, oferă o experiență de conducere dinamică și plină de viață.' },
+            { src: 'Masini/CamarroZ28.png', alt: '...', title: 'Camarro Z28', description: 'Camaro Z28, un muscle car cu adevărat american, impresionează cu forță brută și linii agresive.' },
+            { src: 'Masini/ToyotaMR2.png', alt: '...', title: 'Toyota MR2', description: 'Toyota MR2, o mașină sport compactă, aduce un echilibru perfect între performanță și manevrabilitate.' },
+            { src: 'Masini/MazdaRX7.png', alt: '...', title: 'Mazda RX-7', description: 'Mazda RX-7, o legendă a industriei auto japoneze, demonstrează că eleganța și performanța pot coexista armonios.' },
+            { src: 'Masini/BMWM5F10.png', alt: '...', title: 'BMW M5 F10', description: 'BMW M5 F10, o combinație perfectă de lux și performanță, reprezintă vârful seriei M.' },
+            { src: 'Masini/AudiQuatro.png', alt: '...', title: 'Audi Quatro', description: 'Audi Quatro, pionier al tracțiunii integrale, continuă să fie sinonim cu performanța și tehnologia avansată.' },
+            { src: 'Masini/NissanR32.png', alt: '...', title: 'Nissan Skyline R-32', description: 'Nissan Skyline R-32, o legendă a motorsportului japonez, oferă o combinație unică de performanță și stil.' },
+            { src: 'Masini/NissanS13.png', alt: '...', title: 'Nissan Silvia 13', description: 'Nissan Silvia 13, un coupé sport compact, se remarcă prin agilitate și designul său distinctiv.' },
+            { src: 'Masini/NissanR35.png', alt: '...', title: 'Nissan Skyline R-35', description: 'Nissan Skyline R-35, un supercar modern, impresionează cu performanța sa de excepție și designul futurist.' },
+            { src: 'Masini/Subaru22B.png', alt: '...', title: 'Subaru Imprezza 22B', description: 'Subaru Impreza 22B, o versiune iconică a clasicului Impreza, rămâne o alegere preferată pentru iubitorii de mașini sport.' },
+            // Add more items as needed
+        ];
+
+        // Function to generate showcase items with fadeIn animation
+        function generateShowcase() {
+            const showcase = document.getElementById('showcase');
+            showcase.innerHTML = '';
+
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.classList.add('col-md-4', 'mb-4', 'animate__animated', 'animate__fadeIn', 'delay-' + (index + 1), 'fixed-size-card');
+                card.innerHTML = `
+      <div class="card">
+        <div class="card-front">
+          <img src="${item.src}" class="card-img-top fixed-size-image" alt="${item.alt}">
+          <div class="card-body">
+            <!-- Title and description on the front of the card -->
+          </div>
+        </div>
+        <div class="card-back">
+          <h5 class="card-title">${item.title}</h5>
+          <p class="card-text">${item.description}</p>
+          <!-- Add a button to send a form for each card -->
+          <button type="button" class="btn btn-primary" onclick="sendForm('${item.title}')">Solicita contractul</button>
+        </div>
+      </div>
+    `;
+                showcase.appendChild(card);
+            });
+        }
+
+        function sendForm(title) {
+            window.location.href = "Contract.html";
+        }
+        // Call the function to generate the showcase
+        generateShowcase();
+    </script>
+</body>
+
+</html>
