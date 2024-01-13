@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Amanet</title>
+    <title>Diamond Pawn</title>
     <style>
         body {
             margin: 0;
@@ -14,7 +14,6 @@
             align-items: center;
             height: 100vh;
             font-family: 'Arial', sans-serif;
-            animation: pulsate 3s infinite;
             background: linear-gradient(to bottom right, #1a1a1a, #333);
         }
 
@@ -125,12 +124,12 @@
             var valoare = parseFloat(document.getElementById('valoare').value);
             var zile = parseInt(document.getElementById('zile').value);
 
-            var TB = 0.027; // Tarif de bază
-            var TS = 0.009; // Procent suplimentar pe zi
+            var TB = 0.02763739; // Tarif de bază
+            var TS = 0.00486493; // Procent suplimentar pe zi
 
             var taxa = TB + (TS * valoare * zile);
-
-            document.getElementById('rezultat').innerHTML = "Taxa de amanet este: " + taxa.toFixed(0) + " RON";
+            
+            document.getElementById('rezultat').innerHTML = "Taxa de amanet este: " + taxa.toFixed(2) + " RON";
         }
     </script>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Showcase</title>
+    <title>Diamond Pawn</title>
     <!-- Add Animate.css and Bootstrap CSS link here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -116,6 +116,74 @@
             /* Slower animation */
         }
 
+
+        .navigation {
+            z-index: 1;
+            position: fixed;
+            width: 400px;
+            height: 70px;
+            background: #632f66;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            margin-top: 300px;
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 70px;
+            height: 70px;
+            z-index: 1;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 92px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: var(--clr)
+        }
+
+        .navigation ul li:hover a .icon {
+            transform: translateY(-20px);
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: var(--clr);
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .navigation ul li:hover a .text {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+
         @keyframes shineAnimation {
 
             0%,
@@ -136,8 +204,8 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">
-          Diamond Pawn
+        <a class="navbar-brand" href="Home.html">
+          <img src="diamond.png" style="width: 55px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -240,6 +308,10 @@
             { src: 'Masini/NissanS13.png', alt: '...', title: 'Nissan Silvia 13', description: 'Nissan Silvia 13, un coupé sport compact, se remarcă prin agilitate și designul său distinctiv.' },
             { src: 'Masini/NissanR35.png', alt: '...', title: 'Nissan Skyline R-35', description: 'Nissan Skyline R-35, un supercar modern, impresionează cu performanța sa de excepție și designul futurist.' },
             { src: 'Masini/Subaru22B.png', alt: '...', title: 'Subaru Imprezza 22B', description: 'Subaru Impreza 22B, o versiune iconică a clasicului Impreza, rămâne o alegere preferată pentru iubitorii de mașini sport.' },
+            { src: 'Masini/NissanR34.png', alt: '...', title: 'Nissan R34', description: 'O privire captivantă asupra celebrului Nissan R34. Cu linii aerodinamice și performanțe remarcabile, acest model atrage atenția iubitorilor de mașini sport.' },
+            { src: 'Masini/NissanR34Nismo.png', alt: '...', title: 'Nissan R34 Nismo', description: 'Nissan R34 Nismo, o variantă îmbunătățită a clasicului, este sinonimă cu performanța și stilul. Design-ul agresiv și tehnologia avansată fac din această mașină o alegere deosebită.' },
+            { src: 'Masini/KarinSunrise.png', alt: '...', title: 'Karin Sunrise', description: 'Karin Sunrise impresionează cu eleganța sa și detaliile rafinate. Cu o combinație armonioasă de formă și funcționalitate, această mașină demonstrează un design remarcabil.' },
+            { src: 'Masini/Tug.png', alt: '...', title: 'TUG', description: 'Cu un aspect robust și puternic, TUG emană forță și utilitate. Ideal pentru sarcini grele, acest vehicul este o alegere de încredere pentru orice provocare industrială sau logistică.' },
             // Add more items as needed
         ];
 

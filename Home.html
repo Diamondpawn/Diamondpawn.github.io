@@ -4,10 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawn Shop Showcase</title>
+    <title>Diamond Pawn</title>
     <!-- Add Bootstrap CSS link here -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --clr: #b9edfa;
+        }
+
         body {
             margin: 0;
             overflow: hidden;
@@ -15,9 +28,11 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            min-height: 100vh;
             background: black;
             /* Dark background color */
             color: white;
+            background: var(--clr);
             transition: background 1s ease-in-out;
         }
 
@@ -48,128 +63,76 @@
             color: #b9edfa;
         }
 
-        .explore-btn {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            animation: fadeInUp 1s ease-out;
-            /* Added animation for button */
-            transition: background-color 0.3s, color 0.3s;
-            /* Added smooth transition for hover effect */
+        .navigation {
             z-index: 1;
-            /* Set z-index to 1 to place it above the particles */
-        }
-
-        .explore-btn:hover {
-            background-color: white;
-            color: black;
-        }
-
-        /* Style for the modal */
-        .modal-content {
-            background: #1a1a1a;
-            color: white;
-        }
-
-        .modal-header,
-        .modal-footer {
-            border: none;
-        }
-
-        .modal-header button {
-            color: white;
-        }
-
-        .modal-body {
-            text-align: center;
-        }
-
-        .calculator {
-            text-align: center;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            max-width: 400px;
-            width: 100%;
-            box-sizing: border-box;
-            background: linear-gradient(to bottom, #2c2c2c, #333);
-            color: white;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            font-weight: bold;
-            font-size: 1.5em;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            box-sizing: border-box;
-            font-size: 1.2em;
-            border: 2px solid #555;
-            border-radius: 8px;
-            background-color: #444;
-            color: white;
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus {
-            border-color: #4caf50;
-        }
-
-        .calculate-btn {
-            background-color: #4caf50;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1.2em;
+            position: fixed;
+            width: 400px;
+            height: 70px;
+            background: #632f66;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 10px;
+            margin-top: 300px;
         }
 
-        .calculate-btn:hover {
-            background-color: #45a049;
+        .navigation ul {
+            display: flex;
+            width: 350px;
         }
 
-        .result {
-            margin-top: 20px;
-            font-size: 1.8em;
-            color: #4caf50;
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 70px;
+            height: 70px;
+            z-index: 1;
         }
 
-        /* Animation keyframes */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 92px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: var(--clr)
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .navigation ul li:hover a .icon {
+            transform: translateY(-20px);
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: var(--clr);
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .navigation ul li:hover a .text {
+            opacity: 1;
+            transform: translateY(10px);
         }
     </style>
 </head>
 
 <body>
-
     <!-- Particle Animation -->
     <div id="particles-js"></div>
 
@@ -178,31 +141,49 @@
         <div class="welcome-text">
             Welcome to Diamond Pawn Shop!
         </div>
-        <img src="diamond.png" alt="Explore Image" class="explore-img" style="width: 150px; height: auto;"
-            onclick="openNavigationModal()">
+        <img src="diamond.png" alt="Explore Image" class="explore-img" style="width: 150px; height: auto;">
     </div>
 
-
-    <!-- Modal for Navigation -->
-    <div class="modal" id="navigationModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                </div>
-                <div class="modal-body">
-                    <p><a href="Jewlery.html" onclick="navigateFromModal('Jewlery.html')"
-                            class="btn btn-outline-light explore-btn">Bijuterii</a></p>
-                    <p><a href="Cars.html" onclick="navigateFromModal('Cars.html')"
-                            class="btn btn-outline-light explore-btn">Mașini</a></p>
-                    <p><a href="Simulare.html" onclick="navigateFromModal('Simulare.html')"
-                            class="btn btn-outline-light explore-btn">Simulare contract</a></p>
-                    <p><a href="#" onclick="closeNavigationModal()"
-                            class="btn btn-outline-light explore-btn">Închide</a></p>
-                </div>
-            </div>
-        </div>
+    <div class="navigation">
+        <ul>
+            <li class="list">
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="home"></ion-icon>
+                    </span>
+                    <span class="text">Home</span>
+            </li>
+            <li class="list">
+                <a href="About.html">
+                    <span class="icon">
+                        <ion-icon name="help"></ion-icon>
+                    </span>
+                    <span class="text">About</span>
+            </li>
+            <li class="list">
+                <a href="Jewlery.html">
+                    <span class="icon">
+                        <ion-icon name="cart"></ion-icon>
+                    </span>
+                    <span class="text">Bijuterii</span>
+            </li>
+            <li class="list">
+                <a href="Cars.html">
+                    <span class="icon">
+                        <ion-icon name="car"></ion-icon>
+                    </span>
+                    <span class="text">Masini</span>
+            </li>
+            <li class="list">
+                <a href="Simulare.html">
+                    <span class="icon">
+                        <ion-icon name="calculator"></ion-icon>
+                    </span>
+                    <span class="text">Simuleaza</span>
+            </li>
+        </ul>
     </div>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
     <!-- Add Bootstrap JS and Popper.js scripts here -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -331,21 +312,6 @@
         }
 
         toggleBackgroundColor();
-    </script>
-
-    <script>
-        function openNavigationModal() {
-            $('#navigationModal').modal('show');
-        }
-
-        function closeNavigationModal() {
-            $('#navigationModal').modal('hide');
-        }
-
-        function navigateFromModal(category) {
-            closeNavigationModal();
-            window.location.href = category;
-        }
     </script>
 
 </body>
